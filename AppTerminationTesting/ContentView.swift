@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    let loader: Loader
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text("Testing the app termination")
         }
-        .padding()
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification)) { _ in
+            loader.load()
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(loader: RealLoader())
     }
 }

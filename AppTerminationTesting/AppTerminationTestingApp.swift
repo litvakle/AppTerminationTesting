@@ -9,9 +9,21 @@ import SwiftUI
 
 @main
 struct AppTerminationTestingApp: App {
+    let loader = RealLoader()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(loader: loader)
         }
+    }
+}
+
+protocol Loader {
+    func load()
+}
+
+class RealLoader: Loader {
+    func load() {
+        print("Real loading")
     }
 }
